@@ -1,14 +1,20 @@
 use std::process::Command;
+mod config;
 
 fn main() {
+    let config = config::Config::new();
+
+    dbg!(&config);
+
     println!("Hello, world!");
 
     println!("Hostname: {}", Machine::fetch_hostname());
+
     // send_command();
 }
 
 struct Machine {
-    hostname: String,
+    // hostname: String,
 }
 
 impl Machine {

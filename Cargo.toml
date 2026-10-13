@@ -5,3 +5,8 @@ edition = "2024"
 
 [dependencies]
 anyhow = "1.0.104"
+config = "0.15.27"
+dirs = "7.0.0"
+rand = "0.8"
+rsa = "0.9.10"
+secrecy = "0.10.3"
