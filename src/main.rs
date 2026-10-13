@@ -1,12 +1,27 @@
+use std::process::Command;
+
 fn main() {
     println!("Hello, world!");
-    send_command();
+
+    println!("Hostname: {}", Machine::fetch_hostname());
+    // send_command();
 }
 
-fn send_command() -> anyhow::Result<()> {
-    std::process::Command::new("pmset")
-        .arg("displaysleepnow")
-        .spawn()?;
+struct Machine {
+    hostname: String,
+}
 
-    Ok(())
+impl Machine {
+    fn fetch_hostname() -> String {
+        let hostname = Command::new("hostname")
+            .output()
+            .expect("Failed to set hostname");
+
+        String::from_utf8_lossy(&hostname.stdout).trim().to_string()
+    }
+
+    fn send_sleep_command() -> anyhow::Result<()> {
+        Command::new("pmset").arg("displaysleepnow").spawn()?;
+        Ok(())
+    }
 }
